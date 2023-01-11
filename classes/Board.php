@@ -6,12 +6,12 @@
         
         function render(){
             $render= "<div class='colonne' id='case_".($this->index+1)."'>
-                ".($this->pion?$this->pion->render():"")."
+                ".($this->pion != null ? $this->pion->render() : "")."
             </div>";
             return $render;
         }
 
-        function addPion($couleur){
+        function addPion($couleur,$joueur){
             $this->pion = new Pion($this,$couleur,$joueur);
         }
 
@@ -83,22 +83,23 @@
                 array_push($this->lignes,new Ligne($indexligne,$this->size));
                 $indexligne++;
             }
-            $limit = ($this->size/2)+1;
+            $limit = (int)(($this->size/2)+1);
             $couleur = 0;
             while($couleur < count($couleurs)){
                 $positionligne = 0;
                 while($positionligne < $limit){
                     $ligne = $this->lignes[$positionligne];
                     $positioncase = 0;
-                    if($positionligne+1 == $limit){
+                    if($positionligne == $limit){
                         while($positioncase < $limit){
                             $case = $ligne->getCases()[$positioncase];
-                            $case->addPion($couleurs[$couleur],$joueur+1);
+                            $case->addPion($couleurs[$couleur],$couleur+1);
                             $positioncase++;
                         }
                     }
                     $positionligne++;
                 }
+                $couleur++;
             }
         }
 
