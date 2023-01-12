@@ -86,18 +86,13 @@
             $limit = (int)(($this->size/2)+1);
             $couleur = 0;
             while($couleur < count($couleurs)){
-                $positionligne = 0;
-                while($positionligne < $limit){
-                    $ligne = $this->lignes[$positionligne];
-                    $positioncase = 0;
+                foreach($this->lignes as $positionligne=>$ligne){
                     if($positionligne == $limit){
-                        while($positioncase < $limit){
-                            $case = $ligne->getCases()[$positioncase];
+                        foreach($ligne->getCases() as $positioncase => $case){
                             $case->addPion($couleurs[$couleur],$couleur+1);
                             $positioncase++;
                         }
                     }
-                    $positionligne++;
                 }
                 $couleur++;
             }

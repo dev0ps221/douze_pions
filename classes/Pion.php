@@ -8,7 +8,7 @@
         }
 
         function render(){
-            $render = '<div class="pion '.$this->couleur.'<"></div>';
+            $render = "<div class='pion ".$this->couleur."></div>";
             return $render;
         }
 
