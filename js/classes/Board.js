@@ -17,7 +17,8 @@
 
         }
         
-        constructor(index){
+        constructor(ligne,index){
+            this.ligne = ligne
             this.index = index;
         }
     }
@@ -43,7 +44,7 @@
         setup(){
             let indexcolonne = 0;
             while(indexcolonne < this.size){
-                this.cases.push(new Colonne(indexcolonne));
+                this.cases.push(new Colonne(this,indexcolonne));
                 indexcolonne++;
             }
         }

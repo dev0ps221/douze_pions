@@ -3,6 +3,14 @@ class Pion{
     couleur = null;
     colonne = null;
 
+    getPosition(){
+        return this.colonne
+    }
+
+    movable(){
+
+    }
+
     changeColonne(colonne){
         this.colonne = this.colonne
     }
