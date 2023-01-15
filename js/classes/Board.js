@@ -3,10 +3,10 @@
         pion = null;
         
         render(){
-            let render= `<div class='colonne' id='case_${(this.index+1)}'>
-                ${(this.pion != null ? this.pion.render() : "")}
-            </div>`;
-            return render;
+            if(this.pion != null){
+                this.elem.appendChild(this.pion.render()) 
+            } 
+            return this.elem;
         }
 
         addPion(couleur,joueur){
@@ -14,12 +14,16 @@
         }
 
         showRender(target){
-
+            target.appendChild(this.render)
         }
         
         constructor(ligne,index){
             this.ligne = ligne
+            this.board = this.ligne.board
             this.index = index;
+            this.elem  = document.createElement('div')
+            this.elem.classList.add('colonne')
+            this.elem.id=`case_${(this.index+1)}`
         }
     }
 
@@ -31,14 +35,10 @@
         }
 
         render(){
-            let render = `
-                <section class='ligne' id='ligne_${this.index+1}'>
-            `;
             this.cases.forEach(colonne=>{
-                render = `${render} ${colonne.render()}`;
+                this.elem.appendChild(colonne.render())
             })
-            render = `${render}</section>`;
-            return render;
+            return this.elem;
         }
 
         setup(){
@@ -50,12 +50,16 @@
         }
 
         showRender(target){
-            target.innerHTML = this.render();
+            target.appendChild(this.render());
         }
 
-        constructor(index,size){
+        constructor(board,index,size){
+            this.board = board;
             this.index = index;
             this.size = size;
+            this.elem  = document.createElement('div')
+            this.elem.classList.add('ligne')
+            this.elem.id=`ligne_${(this.index+1)}`
             this.setup();
         }
     }
@@ -72,14 +76,12 @@
         renderBoard(target){
             const gameboard = document.createElement('section')
             gameboard.id = 'gameboard'
-            let render="<section id='board'>";
-            
+            let render= document.createElement('section')
+            render.id = 'board'
             this.lignes.forEach(ligne=>{
-                render = render+ligne.render();
+                render.appendChild(ligne.render());
             })
-            
-            render = render+"</section>";
-            gameboard.innerHTML = render
+            gameboard.appendChild(render)
             target.appendChild(gameboard);
         }
 
@@ -88,7 +90,7 @@
             let indexligne = 0;
             const couleurs = ['rouge','vert'];
             while(indexligne < this.size){
-                this.lignes.push(new Ligne(indexligne,this.size));
+                this.lignes.push(new Ligne(this,indexligne,this.size));
                 indexligne++;
             }
             const limit = parseInt((this.size/2));
