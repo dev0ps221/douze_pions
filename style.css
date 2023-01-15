@@ -9,6 +9,10 @@ body{
     padding: 0;
     background: #ccc;
 }
+#game{
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+}
 #board{
     display: grid;
     grid-template-rows: repeat(5,1fr);

@@ -7,7 +7,7 @@ class Pion{
     }
 
     render(){
-        render = `<div class='pion ${this.couleur}'>
+        let render = `<div class='pion ${this.couleur}'>
         </div>`;
         return render;
     }

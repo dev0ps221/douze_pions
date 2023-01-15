@@ -3,6 +3,10 @@
         pion = null;
         
         render(){
+            let render= `<div class='colonne' id='case_${(this.index+1)}'>
+                ${(this.pion != null ? this.pion.render() : "")}
+            </div>`;
+            return render;
         }
 
         addPion(couleur,joueur){
@@ -26,8 +30,8 @@
         }
 
         render(){
-            const render = `
-                <section class='ligne' id='ligne_(${this.index+1})'>
+            let render = `
+                <section class='ligne' id='ligne_${this.index+1}'>
             `;
             this.cases.forEach(colonne=>{
                 render = `${render} ${colonne.render()}`;
@@ -37,7 +41,7 @@
         }
 
         setup(){
-            indexcolonne = 0;
+            let indexcolonne = 0;
             while(indexcolonne < this.size){
                 this.cases.push(new Colonne(indexcolonne));
                 indexcolonne++;
@@ -60,8 +64,12 @@
         lignes = [];
         size = 5;
 
+        setSize(size=5){
+            this.size = size
+        }
+
         renderBoard(target){
-            render="<section id='board'>";
+            let render="<section id='board'>";
 
             this.lignes.forEach(ligne=>{
                 render = render+ligne.render();
@@ -72,13 +80,14 @@
         }
 
         setup(){
-            indexligne = 0;
-            couleurs = ['rouge','vert'];
+            this.lignes = []
+            let indexligne = 0;
+            const couleurs = ['rouge','vert'];
             while(indexligne < this.size){
-                array_push(this.lignes,new Ligne(indexligne,this.size));
+                this.lignes.push(new Ligne(indexligne,this.size));
                 indexligne++;
             }
-            limit = (int)((this.size/2));
+            const limit = parseInt((this.size/2));
             this.lignes.forEach((ligne,positionligne)=>{
                 ligne.getCases().forEach((colonne,positioncolonne)=>{
                     if(positionligne < limit){
@@ -103,7 +112,7 @@
         }
 
         constructor(size = null){
-            this.size = size ? size : this.size;
+            this.setSize(size ? size : this.size);
             this.setup();
         }
 
