@@ -9,30 +9,111 @@ class Pion{
     }
 
     movable(){
-        const rightMoves = this.checkRightMoves()
-        const letfMoves = this.checkLetfMoves()
-        const upmoves = this.checkUpMoves()
-        const downmoves = this.checkDownMoves()
-        alert(this.playerdirection)
+        const moves = {
+            rightMoves : this.checkRightMoves(),
+            letfMoves : this.checkLeftMoves(),
+            upmoves : this.checkUpMoves(),
+            downmoves : this.checkDownMoves(),
+        }
+        this.highlightMovable(moves)
+    }
+    highlightMovable(){
+        Object.keys(moves).forEach(
+            direction=>{
+                moves[direction].forEach(
+                    coords=>{
+                        
+                    }
+                )
+            }
+        )
     }
     checkDownMoves(){
         const moves = []
-
+        const nextindex = this.linenumber+1
+        this.board.lignes.forEach(
+            ligne=>{
+                if(ligne.index == nextindex){
+                    ligne.cases.forEach(
+                        colonne=>{
+                            if(colonne.index == this.colnumber){
+                                if(colonne.pion==null){
+                                    moves.push(
+                                        {x:this.colnumber,y:nextindex}
+                                    )
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+        )
         return moves
     }
     checkUpMoves(){
         const moves = []
-
+        const nextindex = this.linenumber-1
+        this.board.lignes.forEach(
+            ligne=>{
+                if(ligne.index == nextindex){
+                    ligne.cases.forEach(
+                        colonne=>{
+                            if(colonne.index == this.colnumber){
+                                if(colonne.pion==null){
+                                    moves.push(
+                                        {x:this.colnumber,y:nextindex}
+                                    )
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+        )
         return moves
     }
     checkRightMoves(){
         const moves = []
-
+        const nextindex = this.colnumber+1
+        this.board.lignes.forEach(
+            ligne=>{
+                if(ligne.index == this.linenumber){
+                    ligne.cases.forEach(
+                        colonne=>{
+                            if(colonne.index == nextindex){
+                                if(colonne.pion==null){
+                                    moves.push(
+                                        {x:nextindex,y:this.linenumber}
+                                    )
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+        )
         return moves
     }
-    checkUpMoves(){
+    checkLeftMoves(){
         const moves = []
-        
+        const nextindex = this.colnumber-1
+        this.board.lignes.forEach(
+            ligne=>{
+                if(ligne.index == this.linenumber){
+                    ligne.cases.forEach(
+                        colonne=>{
+                            if(colonne.index == nextindex){
+                                if(colonne.pion==null){
+                                    moves.push(
+                                        {x:nextindex,y:this.linenumber}
+                                    )
+                                }
+                            }
+                        }
+                    )
+                }
+            }
+        )
         return moves
     }
     changeColonne(colonne){
@@ -62,6 +143,9 @@ class Pion{
         this.playerdirection = joueur == 1 ? 'down' : 'up'
         this.colonne = colonne;
         this.board = this.colonne.board
+        this.coords = this.getPosition()
+        this.linenumber = this.coords['y']
+        this.colnumber = this.coords['x']
     }
 
 }

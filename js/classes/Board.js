@@ -69,6 +69,14 @@
         lignes = [];
         size = 5;
 
+        getLigne(){
+            
+        }
+
+        getColonne(at){
+            const ligne = this.getLigne()
+        }
+
         setSize(size=5){
             this.size = size
         }
