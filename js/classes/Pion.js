@@ -17,12 +17,13 @@ class Pion{
         }
         this.highlightMovable(moves)
     }
-    highlightMovable(){
+    highlightMovable(moves){
         Object.keys(moves).forEach(
             direction=>{
                 moves[direction].forEach(
                     coords=>{
-                        
+                        const colonne = this.board.getColonne(coords) 
+                        colonne.highlight(1)
                     }
                 )
             }
@@ -126,12 +127,33 @@ class Pion{
 
     render(){
         this.elem.removeEventListener(
-            'click',(e)=>this.movable()
+            'click',(e)=>{
+                this.processClicked(e)
+            }
         )
         this.elem.addEventListener(
-            'click',(e)=>this.movable()
+            'click',(e)=>{
+                this.processClicked(e)
+            }
         )
         return this.elem;
+    }
+
+    select(doit=false){
+        this.elem.classList[doit?'add':'remove']('selected')
+        this.board.selected = this
+    }
+
+    processClicked(e){
+        if(this.elem.classList.contains('selected')){
+            this.board.unselect()
+            this.board.unhighlight()
+        }else{
+            this.board.unselect()
+            this.select(1)
+            this.movable()
+        }
+        
     }
 
     constructor(colonne,couleur,joueur){

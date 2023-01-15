@@ -3,10 +3,17 @@
         pion = null;
         
         render(){
+            this.elem.innerHTML = ""
             if(this.pion != null){
                 this.elem.appendChild(this.pion.render()) 
             } 
             return this.elem;
+        }
+
+        highlight(doit=false){
+            this.elem.classList[doit?'add':'remove']('highlighted')
+            this.board.highlighted.push(this)
+            this.refresh()
         }
 
         addPion(couleur,joueur){
@@ -15,6 +22,10 @@
 
         showRender(target){
             target.appendChild(this.render)
+        }
+
+        refresh(){
+            this.render()
         }
         
         constructor(ligne,index){
@@ -68,7 +79,8 @@
 
         lignes = [];
         size = 5;
-
+        highlighted = []
+        selected = null
         getLigne(index){
             let match = null
             this.lignes.forEach(
@@ -83,8 +95,13 @@
             let match = null
             const ligne = this.getLigne(at.y)
             if(ligne){
-
+                ligne.cases.forEach(
+                    colonne=>{
+                        if(colonne.index == at.x) match = colonne
+                    }
+                )
             }
+            return match
         }
 
         setSize(size=5){
@@ -101,6 +118,22 @@
             })
             gameboard.appendChild(render)
             target.appendChild(gameboard);
+        }
+
+        unhighlight(){
+            this.highlighted.forEach(
+                highlighted=>{
+                    highlighted.highlight(0)
+                }
+            )
+            this.highlighted = []
+        }
+
+        unselect(){
+            if(this.selected){
+                this.selected.select(0)
+            }
+            this.selected=null
         }
 
         setup(){

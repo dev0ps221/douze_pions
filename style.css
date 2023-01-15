@@ -30,6 +30,9 @@ body{
     width: 100%;
     border: 2px solid aqua;
 }
+.colonne.highlighted{
+    background: #ddd;
+}
 .pion{
     transition: .4s;
     cursor: pointer;
@@ -40,6 +43,9 @@ body{
     height: 50%;
     display: flex;
     border-radius: 5em;
+}
+.pion.selected{
+    border-color:#ddd ;
 }
 .rouge{
     background: red;
