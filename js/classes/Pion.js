@@ -2,6 +2,11 @@ class Pion{
     joueur  = null;
     couleur = null;
     colonne = null;
+
+    changeColonne(colonne){
+        this.colonne = this.colonne
+    }
+
     getCouleur(){
         return this.couleur;
     }

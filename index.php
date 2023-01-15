@@ -9,17 +9,13 @@
 </head>
 <body>
     <section id='game'>
-        <section id="gameboard">
-        </section>
-        <aside id="gameoptions">
-        </aside>  
     </section>
     <script src='/js/classes/Pion.js'></script>
     <script src='/js/classes/Board.js'></script>
     <script src='/js/classes/Joueur.js'></script>
     <script src='/js/classes/Game.js'></script>
     <script>
-        game = new Game(document.querySelector('#game #gameboard'))
+        game = new Game(document.querySelector('#game'))
     </script>
 </body>
 </html>

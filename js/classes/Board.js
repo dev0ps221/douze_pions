@@ -69,14 +69,17 @@
         }
 
         renderBoard(target){
+            const gameboard = document.createElement('section')
+            gameboard.id = 'gameboard'
             let render="<section id='board'>";
-
+            
             this.lignes.forEach(ligne=>{
                 render = render+ligne.render();
             })
-
+            
             render = render+"</section>";
-            target.innerHTML = render;
+            gameboard.innerHTML = render
+            target.appendChild(gameboard);
         }
 
         setup(){
