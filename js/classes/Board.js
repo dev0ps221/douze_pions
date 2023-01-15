@@ -69,12 +69,22 @@
         lignes = [];
         size = 5;
 
-        getLigne(){
-            
+        getLigne(index){
+            let match = null
+            this.lignes.forEach(
+                ligne=>{
+                    if(ligne.index==index) match = ligne
+                }
+            )
+            return match
         }
 
         getColonne(at){
-            const ligne = this.getLigne()
+            let match = null
+            const ligne = this.getLigne(at.y)
+            if(ligne){
+
+            }
         }
 
         setSize(size=5){
