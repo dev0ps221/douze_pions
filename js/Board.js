@@ -13,7 +13,7 @@
 
         }
         
-        __construct(index){
+        constructor(index){
             this.index = index;
         }
     }
@@ -48,7 +48,7 @@
             target.innerHTML = this.render();
         }
 
-        __construct(index,size){
+        constructor(index,size){
             this.index = index;
             this.size = size;
             this.setup();
@@ -60,15 +60,15 @@
         lignes = [];
         size = 5;
 
-        renderBoard(){
+        renderBoard(target){
             render="<section id='board'>";
 
-            this.lignes.forEach(ligne){
-                render = render.ligne.render();
-            }
+            this.lignes.forEach(ligne=>{
+                render = render+ligne.render();
+            })
 
-            render = render."</section>";
-            echo render;
+            render = render+"</section>";
+            target.innerHTML = render;
         }
 
         setup(){
@@ -79,30 +79,30 @@
                 indexligne++;
             }
             limit = (int)((this.size/2));
-            foreach(this.lignes as positionligne=>ligne){
-                foreach(ligne.getCases() as positioncase => case){
+            this.lignes.forEach((ligne,positionligne)=>{
+                ligne.getCases().forEach((colonne,positioncolonne)=>{
                     if(positionligne < limit){
-                        case.addPion(couleurs[0],1);
+                        colonne.addPion(couleurs[0],1);
                     }
                     if(positionligne == limit){
-                        if(positioncase!=limit){
-                            if(positioncase < limit){
-                                case.addPion(couleurs[0],1);
+                        if(positioncolonne!=limit){
+                            if(positioncolonne < limit){
+                                colonne.addPion(couleurs[0],1);
                             }
-                            if(positioncase>limit){
-                                case.addPion(couleurs[1],2);    
+                            if(positioncolonne>limit){
+                                colonne.addPion(couleurs[1],2);    
                             } 
                         }
                     }
                     if(positionligne>limit){
-                        case.addPion(couleurs[1],2);    
+                        colonne.addPion(couleurs[1],2);    
                     }
-                }
-            }
+                })
+            })
         
         }
 
-        __construct(size = null){
+        constructor(size = null){
             this.size = size ? size : this.size;
             this.setup();
         }
