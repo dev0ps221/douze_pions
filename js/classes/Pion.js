@@ -4,6 +4,10 @@ class Pion{
     colonne = null;
     playerdirection = null;
 
+    kill(target){
+        
+    }
+
     getPosition(){
         return {x:this.colonne.index,y:this.colonne.ligne.index}
     }
