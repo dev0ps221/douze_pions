@@ -1,6 +1,8 @@
-class Options{
 
-    renderOptions(target){
+class GameOptions{
+
+
+    renderGameOptions(target){
         const gameoptions = document.createElement('section')
         gameoptions.id = 'options'
         target.appendChild(gameoptions);
@@ -20,8 +22,10 @@ class Game{
     }
 
     setup(){
-        this.setupBoard()
-        this.refreshOptions()
+        this.setupBoard(
+
+        )
+        this.refreshGameOptions()
     }
 
     setupBoard(){
@@ -34,16 +38,19 @@ class Game{
             this.board.renderBoard(this.target)
         }
     }
-    refreshOptions(){
+
+    refreshGameOptions(){
         if(this.target){
-            this.options.renderOptions(this.target)
+
+            this.options.renderGameOptions(this.target)
         }
     }
 
     constructor(target){
         this.setTarget(target)
-        this.board = new Board(this.size)
-        this.options = new Options()
+        this.board = new Board(
+            this.size)
+        this.options = new GameOptions()
         this.setup()
     }
 
