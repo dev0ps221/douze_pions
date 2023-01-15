@@ -126,16 +126,6 @@ class Pion{
     }
 
     render(){
-        this.elem.removeEventListener(
-            'click',(e)=>{
-                this.processClicked(e)
-            }
-        )
-        this.elem.addEventListener(
-            'click',(e)=>{
-                this.processClicked(e)
-            }
-        )
         return this.elem;
     }
 
@@ -168,6 +158,16 @@ class Pion{
         this.coords = this.getPosition()
         this.linenumber = this.coords['y']
         this.colnumber = this.coords['x']
+        this.elem.removeEventListener(
+            'click',(e)=>{
+                this.processClicked(e)
+            }
+        )
+        this.elem.addEventListener(
+            'click',(e)=>{
+                this.processClicked(e)
+            }
+        )
     }
 
 }

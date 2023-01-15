@@ -1,7 +1,7 @@
 
     class Colonne{
         pion = null;
-        
+        isHighLighted = false
         render(){
             this.elem.innerHTML = ""
             if(this.pion != null){
@@ -13,7 +13,26 @@
         highlight(doit=false){
             this.elem.classList[doit?'add':'remove']('highlighted')
             this.board.highlighted.push(this)
+            this.elem[(doit ? 'add':'remove')+'EventListener'](
+                'click',e=>{
+                    this.movePion()
+                }
+            )
             this.refresh()
+            this.isHighLighted = doit
+        }
+
+        movePion(){
+            if(this.isHighLighted){
+                if(this.board.selected){
+                    const colonne = this.board.selected.colonne
+                    this.pion = colonne.pion
+                    colonne.pion = null
+                    this.board.renderBoard(this.board.target)
+                    this.highlight(0)
+                }
+            }
+            this.board.unhighlight()
         }
 
         addPion(couleur,joueur){
@@ -21,7 +40,7 @@
         }
 
         showRender(target){
-            target.appendChild(this.render)
+            target.appendChild(this.render())
         }
 
         refresh(){
@@ -109,6 +128,8 @@
         }
 
         renderBoard(target){
+            this.target = target
+            this.target.innerHTML =""
             const gameboard = document.createElement('section')
             gameboard.id = 'gameboard'
             let render= document.createElement('section')
